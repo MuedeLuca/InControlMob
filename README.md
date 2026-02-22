@@ -2,10 +2,10 @@
 
 **InControlMob** is a powerful, rule-driven mob control plugin for Minecraft servers running Paper 1.21. Inspired by the "In Control!" mod, it allows server admins to fine-tune mob spawns, attributes, loot, and experience using flexible JSON rules.
 
-This fork of [the original](https://github.com/mahadimdinfo-rgb/InControlMob) intends to improve upon the Original by providing further customization options as well as adding clearer documentation.
+This fork intends to improve upon [the Original](https://github.com/mahadimdinfo-rgb/InControlMob) by providing further customization options as well as adding clearer documentation.
 For convenience, I'll try to keep the logic as close to the Original as possible.
 
-This fork has been created mainly for private usage, but for the easons of ease of use, as well as for documentation, I've decided for it to be public.
+This fork has been created mainly for private usage, and I cannot guarantee to keep it up-to-date. However, anybody is free to use it as they like and improve upon it.
 
 ## Features
 
@@ -35,6 +35,13 @@ This fork has been created mainly for private usage, but for the easons of ease 
 ## Configuration Rules
 
 Rules are located in `plugins/InControlMob/*.json`.
+
+Currently, the following files exist:
+`experience.json`
+`loot.json`
+`spawn.json`
+`spawner.json`
+`summon.json`
 
 ### Example: Deny Pigs Globally
 File: `spawn.json`
