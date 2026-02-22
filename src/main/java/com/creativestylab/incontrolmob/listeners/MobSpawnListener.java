@@ -3,6 +3,7 @@ package com.creativestylab.incontrolmob.listeners;
 import com.creativestylab.incontrolmob.InControlMob;
 import com.creativestylab.incontrolmob.rules.ActionExecutor;
 import com.creativestylab.incontrolmob.rules.Rule;
+import com.creativestylab.incontrolmob.rules.RuleActions;
 import com.creativestylab.incontrolmob.rules.RuleMatcher;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -12,11 +13,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import java.util.List;
-import java.util.random;
+import java.util.Random;
 
 public class MobSpawnListener implements Listener {
 
     private final InControlMob plugin;
+    private final Random random = new Random();
 
     public MobSpawnListener(InControlMob plugin) {
         this.plugin = plugin;
@@ -64,23 +66,24 @@ public class MobSpawnListener implements Listener {
 
                     // Replacement
                     if (rule.actions.setReplaceEffects != null ) {
-                        SpawnReplaceData replaceData = rule.actions.setReplaceEffects;
-                        if (replaceData.spawnchance != null ) {
-                            if (random.nextDouble() <= replaceData.spawnchance) { // First, apply chance of replacing
-                                try: {
-                                    EntityType newType = EntityType.valueOf(replaceData.replaceEntityType.toUpperCase());
-                                    event.setCancelled(true); // select entity to spawn & cancel old entity
+                        for (RuleActions.SpawnReplaceData replaceData : rule.actions.setReplaceEffects) {
+                            if (replaceData.replaceEntityType != null && !replaceData.replaceEntityType.isEmpty() && replaceData.spawnchance > 0.0) {
+                                if (random.nextDouble() <= replaceData.spawnchance) { // First, apply chance of replacing
+                                    try {
+                                        EntityType newType = EntityType.valueOf(replaceData.replaceEntityType.toUpperCase());
+                                        event.setCancelled(true); // select entity to spawn & cancel old entity
 
-                                    int spawncount = Math.max(1, replaceData.count) // prevent returning 0
-                                    for (int i = 0; i < spawncount; i++) {                                          //for the expected number of times:
-                                        event.getLocation().getWorld().spawnEntity(event.getLocation(), newType);   //spawn expected unit
+                                        int spawncount = Math.max(1, replaceData.count); // prevent returning 0
+                                        for (int i = 0; i < spawncount; i++) {                                          //for the expected number of times:
+                                            event.getLocation().getWorld().spawnEntity(event.getLocation(), newType);   //spawn expected unit
+                                        }
+                                        return true;
+                                    } catch (IllegalArgumentException e) {
+                                        plugin.getLogger().warning("Invalid entity type for replacement: " + replaceData.replaceEntityType);
                                     }
-                                    return true;
-                                } catch (IllegalArgumentException e) {
-                                    plugin.getLogger().warning("Invalid entity type for replacement: " + replaceData.replaceEntityType);
                                 }
                             }
-                        }
+                        }    
                     }
 // I'll keep the old replace logic for now, cleanup can come later
                     

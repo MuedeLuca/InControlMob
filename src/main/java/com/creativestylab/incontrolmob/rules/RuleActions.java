@@ -36,7 +36,7 @@ public class RuleActions {
 
     public static class SpawnReplaceData {
         public String replaceEntityType; // For spawning a different mob
-        public double spawnchance; // Chance of replacing the mob
+        public Double spawnchance; // Chance of replacing the mob
         public int count; // For spawning multiple mobs
     } 
 
