@@ -18,6 +18,9 @@ public class RuleActions {
     public Boolean setAI;
     public String setCustomName;
 
+    // Replace Effects
+    public List<SpawnReplaceData> setReplaceEffects;
+
     // Potion Effects
     public List<PotionEffectData> addPotionEffects;
 
@@ -31,8 +34,11 @@ public class RuleActions {
     public List<ItemData> replaceDrops;
     public Integer setExperience;
 
-    // Spawn specific
-    public String replaceEntityType; // For spawning diff mob
+    public static class SpawnReplaceData {
+        public String replaceEntityType; // For spawning a different mob
+        public double spawnchance; // Chance of replacing the mob
+        public int count; // For spawning multiple mobs
+    } 
 
     public static class PotionEffectData {
         public String type;

@@ -12,6 +12,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import java.util.List;
+import java.util.random;
 
 public class MobSpawnListener implements Listener {
 
@@ -62,11 +63,30 @@ public class MobSpawnListener implements Listener {
                     }
 
                     // Replacement
+                    if (rule.actions.setReplaceEffects != null ) {
+                        SpawnReplaceData replaceData = rule.actions.setReplaceEffects;
+                        if (replaceData.spawnchance != null ) {
+                            if (random.nextDouble() <= replaceData.spawnchance) { // First, apply chance of replacing
+                                try: {
+                                    EntityType newType = EntityType.valueOf(replaceData.replaceEntityType.toUpperCase());
+                                    event.setCancelled(true); // select entity to spawn & cancel old entity
+
+                                    int spawncount = Math.max(1, replaceData.count) // prevent returning 0
+                                    for (int i = 0; i < spawncount; i++) {                                          //for the expected number of times:
+                                        event.getLocation().getWorld().spawnEntity(event.getLocation(), newType);   //spawn expected unit
+                                    }
+                                    return true;
+                                } catch (IllegalArgumentException e) {
+                                    plugin.getLogger().warning("Invalid entity type for replacement: " + replaceData.replaceEntityType);
+                                }
+                            }
+                        }
+                    }
                     if (rule.actions.replaceEntityType != null) {
                         try {
                             EntityType newType = EntityType.valueOf(rule.actions.replaceEntityType.toUpperCase());
                             event.setCancelled(true);
-                            // Span new entity
+                            // Spawn new entity
                             // TODO: Pass context to new entity? Beware infinite recursion if rule matches
                             // new entity.
                             // Basic impl:

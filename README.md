@@ -34,7 +34,7 @@ This fork has been created mainly for private usage, and I cannot guarantee to k
 
 ## Configuration Rules
 
-Rules are located in `plugins/InControlMob/*.json`.
+Files for adding rules are located in `plugins/InControlMob/*.json`.
 
 Currently, the following files exist:
 `experience.json`
@@ -42,6 +42,18 @@ Currently, the following files exist:
 `spawn.json`
 `spawner.json`
 `summon.json`
+
+### Logic
+
+The plugin follows this order when changing the way entities are spawned:
+1. check conditions 
+2. check allow/deny
+3. replace entity
+4. apply actions
+
+Due to this, please be aware of the logic during use. Any applied actions currently do **not** carry over if the entity is replaced.  Applying actions in the same rule as replacing an entity would, theoretically, apply those actions to the entity that is being replaced. Therefore, to apply effects to the new entity, you'll currently need two seperate rules.
+
+**Please be aware that as of this version, recursive replacement of a unit (e.g. spawning two zombies instead of one) is possible, as no safeguard has been built in. This is true for both direct recursive rules (a zombie being replaced by two zombies) as well as recursive chains (e.g. 2 zombies replacing a creeper, two creepers replacing a zombie). You have been warned.** 
 
 ### Example: Deny Pigs Globally
 File: `spawn.json`
