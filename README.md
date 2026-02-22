@@ -2,6 +2,11 @@
 
 **InControlMob** is a powerful, rule-driven mob control plugin for Minecraft servers running Paper 1.21. Inspired by the "In Control!" mod, it allows server admins to fine-tune mob spawns, attributes, loot, and experience using flexible JSON rules.
 
+This fork of [the original](https://github.com/mahadimdinfo-rgb/InControlMob) intends to improve upon the Original by providing further customization options as well as adding clearer documentation.
+For convenience, I'll try to keep the logic as close to the Original as possible.
+
+This fork has been created mainly for private usage, but for the easons of ease of use, as well as for documentation, I've decided for it to be public.
+
 ## Features
 
 - **Rule Engine**: Control spawns, health, equipment, potion effects, and more based on detailed conditions (Biome, Time, Light Level, WorldGuard Region, etc.).
