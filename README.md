@@ -107,6 +107,10 @@ File: `spawn.json`
 
 ## Changelog
 
+**v1.1.0**
+- Forked Version "InControlMob-MuedeLuca"
+- added extended entity replacement options
+
 **v1.0.0**
 - Initial release.
 - Support for Spawn, Spawner, Summon, Loot, and Experience rules.

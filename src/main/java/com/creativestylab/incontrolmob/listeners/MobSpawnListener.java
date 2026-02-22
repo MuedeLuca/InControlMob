@@ -82,22 +82,24 @@ public class MobSpawnListener implements Listener {
                             }
                         }
                     }
-                    if (rule.actions.replaceEntityType != null) {
-                        try {
-                            EntityType newType = EntityType.valueOf(rule.actions.replaceEntityType.toUpperCase());
-                            event.setCancelled(true);
+// I'll keep the old replace logic for now, cleanup can come later
+                    
+//                    if (rule.actions.replaceEntityType != null) {
+//                        try {
+//                            EntityType newType = EntityType.valueOf(rule.actions.replaceEntityType.toUpperCase());
+//                            event.setCancelled(true);
                             // Spawn new entity
                             // TODO: Pass context to new entity? Beware infinite recursion if rule matches
                             // new entity.
                             // Basic impl:
-                            event.getLocation().getWorld().spawnEntity(event.getLocation(), newType);
+//                            event.getLocation().getWorld().spawnEntity(event.getLocation(), newType);
                             // We return true because existing event is cancelled.
-                            return true;
-                        } catch (IllegalArgumentException e) {
-                            plugin.getLogger()
-                                    .warning("Invalid entity type for replacement: " + rule.actions.replaceEntityType);
-                        }
-                    }
+//                            return true;
+//                        } catch (IllegalArgumentException e) {
+//                            plugin.getLogger()
+//                                    .warning("Invalid entity type for replacement: " + rule.actions.replaceEntityType);
+//                        }
+//                    }
 
                     // Apply actions
                     ActionExecutor.execute(rule.actions, entity);

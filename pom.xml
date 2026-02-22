@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.creativestylab</groupId>
-    <artifactId>incontrolmob</artifactId>
-    <version>1.0.0</version>
+    <artifactId>incontrolmob-muedeluca</artifactId>
+    <version>1.1.0</version>
     <packaging>jar</packaging>
 
-    <name>InControlMob</name>
-    <description>Rule-driven mob control system for Minecraft 1.21</description>
+    <name>InControlMob-MuedeLuca</name>
+    <description>Rule-driven mob control system for Minecraft 1.21 originally made by creativestylab, modified version by MuedeLuca</description>
     <url>https://creativestylab.com</url>
 
     <properties>
